@@ -36,6 +36,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="Numpy.Bare" Version="3.7.1.4" />
+    <PackageReference Include="Python.Included">
+      <Version>3.11.6</Version>
+    </PackageReference>
+    <PackageReference Include="Python.Runtime">
+      <Version>2.7.9</Version>
+    </PackageReference>
     <Reference Include="Emgu.CV, Version=4.9.0.5494, Culture=neutral, PublicKeyToken=7281126722ab4438, processorArchitecture=MSIL">
       <HintPath>packages\Emgu.CV.4.9.0.5494\lib\netstandard2.0\Emgu.CV.dll</HintPath>
     </Reference>
@@ -50,6 +57,9 @@
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib, Version=1.4.2.13, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
       <HintPath>packages\SharpZipLib.1.4.2\lib\netstandard2.0\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Keras, Version=3.8.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Keras.NET.3.8.5\lib\netstandard2.0\Keras.dll</HintPath>
     </Reference>
     <Reference Include="MethodBoundaryAspect, Version=2.0.149.0, Culture=neutral, PublicKeyToken=296379d5065c9d61, processorArchitecture=MSIL">
       <HintPath>packages\MethodBoundaryAspect.Fody.2.0.149\lib\net462\MethodBoundaryAspect.dll</HintPath>
@@ -71,6 +81,15 @@
     </Reference>
     <Reference Include="PureHDF, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\PureHDF.1.0.0\lib\netstandard2.0\PureHDF.dll</HintPath>
+    </Reference>
+    <Reference Include="Python.Deployment, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Python.Deployment.2.0.0\lib\netstandard2.0\Python.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="Python.Included, Version=3.10.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Python.Included.3.11.1\lib\netstandard2.0\Python.Included.dll</HintPath>
+    </Reference>
+    <Reference Include="Python.Runtime, Version=3.0.1.0, Culture=neutral, PublicKeyToken=5000fea6cba702dd, processorArchitecture=MSIL">
+      <HintPath>packages\pythonnet.3.0.1\lib\netstandard2.0\Python.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Razorvine.Pickle, Version=1.4.0.0, Culture=neutral, PublicKeyToken=35192c03a6ef2e20, processorArchitecture=MSIL">
       <HintPath>packages\Razorvine.Pickle.1.4.0\lib\netstandard2.0\Razorvine.Pickle.dll</HintPath>
@@ -136,9 +155,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="Tensorflow.Binding, Version=0.150.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>packages\TensorFlow.NET.0.150.0\lib\netstandard2.0\Tensorflow.Binding.dll</HintPath>
-    </Reference>
-    <Reference Include="Tensorflow.Keras, Version=0.15.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>packages\TensorFlow.Keras.0.15.0\lib\netstandard2.0\Tensorflow.Keras.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -1,66 +1,68 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
+using System.IO;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Tensorflow;
-using Tensorflow.Keras;
-using Tensorflow.Keras.Layers;
-using Tensorflow.Keras.Models;
-using Tensorflow.Keras.Optimizers;
+//using Tensorflow.NumPy;
+using static Tensorflow.Binding;
+
+using Keras;
+using Keras.Layers;
+using Keras.Models;
+using Keras.Optimizers;
+
 using NumSharp;
+using Emgu.CV.Structure;
+using Tensorflow.Keras.Engine;
+using Tensorflow.Operations.Initializers;
+using Emgu.CV.Features2D;
+using System.Linq;
+using Python.Runtime;
 
 
-namespace TuningMobileNet
+namespace PowerlineInsulatorClassifier
 {
     class Program
     {
-        //define some parameters
-        private static int ImageHeight = 224;
-        private static int ImageWidth = 224;
-        //the model only takes in 224x224 images
-        //private of course, static because the "program" class 
-        //is not going to be instantiated. it's the program class
+        // Define constants for image dimensions and path to save the model
+        private const int ImageHeight = 224;
+        private const int ImageWidth = 224;
+        private static string ModelSavePath = "C:\\Users\\salva\\source\\repos\\TuningMobileNet\\Saved_Model";
+
         static void Main(string[] args)
         {
-
-            //step 1: load, preprocess images
-            string dataDir = "C:\\Users\\salva\\OneDrive\\Desktop\\InsulatorDataSet-master";
+            // Load and preprocess images
+            string dataDir = "C:\\Users\\salva\\source\\repos\\TuningMobileNet\\imageData"; // Set your directory path for images 
             var images = LoadAndPreprocessImages(dataDir);
 
-            //step 2: load model and customize final layer 
+            // Load and prepare the MobileNetV2 model for fine-tuning
             var model = LoadMobileNetV2Model();
 
-            //step 3: train the model
+            // Train the model
             TrainModel(model, images);
 
-            //step 4: save the newly trained model 
-            model.Save("C:\\Users\\salva\\source\\repos\\TuningMobileNet");
-            Console.WriteLine("model trained and saved!");
+            // Save the trained model
+            model.SaveOnnx(ModelSavePath);
         }
 
-        static List<(NDArray, int)> LoadAndPreprocessImages(string dataDir)
+        static List<(NumSharp.NDArray, int)> LoadAndPreprocessImages(string dataDir)
         {
-            var images = new List<(NDArray, int)>();
-            //the list<(NDArray, int)> syntax means that every item in this array is
-            //a tuple that contains both an n-dimensional array and an int
-            //so you can visualize it as, each i of the index contains a single 
-            //n-dimensional array and a single int at that spot of the array index 
-            //and of course this is not an array, but a list - it can change size 
+            var images = new List<(NumSharp.NDArray, int)>();
 
             foreach (var file in Directory.GetFiles(dataDir))
             {
-                //load images using emgu cv 
+                // Load image using Emgu CV
                 Mat img = CvInvoke.Imread(file, ImreadModes.Color);
 
-                //resize to the model-required size 
+                // Resize to MobileNetV2's expected input size
                 CvInvoke.Resize(img, img, new System.Drawing.Size(ImageWidth, ImageHeight));
 
-                //convert to NDArray for TensorFlow.NET
-                var imgData = np.array(img.ToImage<Bgr, byte>().Data);
+                // Convert image to NDArray for TensorFlow
+                var imgData = new NumSharp.NDArray(img.ToImage<Bgr, byte>().Data);
 
-                //assign label based on filename or directory stucture
-                int label = file.Contains("broken") ? 1 : 0;
+                // Determine label based on filename or directory structure
+                int label = file.Contains("broken") ? 1 : 0; // Adjust based on your file naming
 
                 images.Add((imgData, label));
             }
@@ -68,34 +70,52 @@ namespace TuningMobileNet
             return images;
         }
 
-        static keras.Sequential LoadMobileNetV2Model()
+        static Sequential LoadMobileNetV2Model()
         {
-            //load MobileNetV2 with pre-trained weights
-            var model = keras.applications.MobileNetV2(weights: "imagenet",
-                include_top: false, input_shape: (ImageHeight, ImageWidth, 3));
+            var model = new Sequential();
+            model.Add(new Conv2D(32, new Tuple<int, int>(3, 3), strides: new Tuple<int, int>(2, 2), padding: "same", activation: "relu", input_shape: new Keras.Shape(224, 224, 3)));
+            model.Add(new BatchNormalization());
 
-            //add custom classification layers
-            model.add(new GlobalAveragePooling2D());
-            model.add(new Dense(1, ActivationContext: "sigmoid"));
+            // Depthwise separable convolutions to approximate MobileNetV2 layers
+            model.Add(new DepthwiseConv2D(new Tuple<int, int>(3, 3), padding: "same", strides: new Tuple<int, int>(1, 1)));
+            model.Add(new BatchNormalization());
+            model.Add(new Conv2D(64, new Tuple<int, int>(1, 1), activation: "relu"));
+            model.Add(new BatchNormalization());
 
-            model.compile(optimizer: new Adam(learning_rate 0.001), loss: keras.losses.BinaryCrossentropy(),
-                metrics: new[] { "accuracy" });
+            // Additional Depthwise Convolution and Normalization layers
+            model.Add(new DepthwiseConv2D(new Tuple<int, int>(3, 3), padding: "same", strides: new Tuple<int, int>(2, 2)));
+            model.Add(new BatchNormalization());
+            model.Add(new Conv2D(128, new Tuple<int, int>(1, 1), activation: "relu"));
+            model.Add(new BatchNormalization());
+
+            // Final pooling and classification layers
+            model.Add(new GlobalAveragePooling2D());
+            model.Add(new Dense(1, activation: "sigmoid"));
+
+            // Compile the model
+            model.Compile(optimizer: new Adam(0.001f), loss: "binary_crossentropy", metrics: new[] { "accuracy" });
 
             return model;
         }
 
-        static void TrainModel(Tensorflow.Keras.Engine.Sequential model, List<(NDArray, int)> images)
+
+
+        static void TrainModel(Sequential model, List<(NumSharp.NDArray, int)> images)
         {
-            //convert images to suitable tensors for model input
-            var xTrain = np.array(images.ConvertAll(img => img.Item1));
+  
+            var xTrainData = images.Select(img => img.Item1.ToArray<float>()).ToArray();
+            var xTrainNumSharp = NumSharp.np.array(xTrainData).reshape(images.Count, 224, 224, 3);
 
-            var yTrain = np.array(images.ConvertAll(img => img.Item2));
 
-            //train the model
-            model.fit(xTrain, yTrain, epochs: 10, batch_size: 32, validation_split: 0.2f);
+            var yTrainData = images.Select(img => (float)img.Item2).ToArray();
+            var yTrainNumSharp = NumSharp.np.array(yTrainData).reshape(images.Count, 1);
+
+      
+            model.Fit(xTrainData, yTrainData, epochs: 10, batch_size: 32, validation_split: 0.2f);
         }
-    }
-}
 
+    }
+
+}
 
 

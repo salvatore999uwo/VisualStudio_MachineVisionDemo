@@ -1,0 +1,720 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETFramework,Version=v4.7.2": {
+      "Microsoft.CSharp/4.7.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "Numpy.Bare/3.7.1.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "Python.Runtime.NETStandard": "3.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        }
+      },
+      "Python.Deployment/2.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        }
+      },
+      "Python.Included/3.11.6": {
+        "type": "package",
+        "dependencies": {
+          "Python.Deployment": "2.0.5",
+          "pythonnet": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        }
+      },
+      "Python.Runtime/2.7.9": {
+        "type": "package"
+      },
+      "Python.Runtime.NETStandard/3.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        }
+      },
+      "pythonnet/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Reflection.Emit/4.3.0": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win": {
+      "Microsoft.CSharp/4.7.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "Numpy.Bare/3.7.1.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "Python.Runtime.NETStandard": "3.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        }
+      },
+      "Python.Deployment/2.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        }
+      },
+      "Python.Included/3.11.6": {
+        "type": "package",
+        "dependencies": {
+          "Python.Deployment": "2.0.5",
+          "pythonnet": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        }
+      },
+      "Python.Runtime/2.7.9": {
+        "type": "package"
+      },
+      "Python.Runtime.NETStandard/3.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        }
+      },
+      "pythonnet/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Reflection.Emit/4.3.0": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win-arm64": {
+      "Microsoft.CSharp/4.7.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "Numpy.Bare/3.7.1.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "Python.Runtime.NETStandard": "3.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        }
+      },
+      "Python.Deployment/2.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        }
+      },
+      "Python.Included/3.11.6": {
+        "type": "package",
+        "dependencies": {
+          "Python.Deployment": "2.0.5",
+          "pythonnet": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        }
+      },
+      "Python.Runtime/2.7.9": {
+        "type": "package"
+      },
+      "Python.Runtime.NETStandard/3.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        }
+      },
+      "pythonnet/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Reflection.Emit/4.3.0": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win-x64": {
+      "Microsoft.CSharp/4.7.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "Numpy.Bare/3.7.1.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "Python.Runtime.NETStandard": "3.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        }
+      },
+      "Python.Deployment/2.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        }
+      },
+      "Python.Included/3.11.6": {
+        "type": "package",
+        "dependencies": {
+          "Python.Deployment": "2.0.5",
+          "pythonnet": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        }
+      },
+      "Python.Runtime/2.7.9": {
+        "type": "package"
+      },
+      "Python.Runtime.NETStandard/3.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        }
+      },
+      "pythonnet/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Reflection.Emit/4.3.0": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    },
+    ".NETFramework,Version=v4.7.2/win-x86": {
+      "Microsoft.CSharp/4.7.0": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "Microsoft.CSharp"
+        ],
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      },
+      "Numpy.Bare/3.7.1.4": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.5.0",
+          "Python.Runtime.NETStandard": "3.7.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Numpy.Bare.dll": {}
+        }
+      },
+      "Python.Deployment/2.0.5": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Deployment.dll": {}
+        }
+      },
+      "Python.Included/3.11.6": {
+        "type": "package",
+        "dependencies": {
+          "Python.Deployment": "2.0.5",
+          "pythonnet": "3.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Included.dll": {}
+        }
+      },
+      "Python.Runtime/2.7.9": {
+        "type": "package"
+      },
+      "Python.Runtime.NETStandard/3.7.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.NETStandard.dll": {}
+        }
+      },
+      "pythonnet/3.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "System.Reflection.Emit": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netstandard2.0/Python.Runtime.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "System.Reflection.Emit/4.3.0": {
+        "type": "package",
+        "compile": {
+          "ref/net45/_._": {}
+        },
+        "runtime": {
+          "lib/net45/_._": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Microsoft.CSharp/4.7.0": {
+      "sha512": "pTj+D3uJWyN3My70i2Hqo+OXixq3Os2D1nJ2x92FFo6sk8fYS1m1WLNTs0Dc1uPaViH0YvEEwvzddQ7y4rhXmA==",
+      "type": "package",
+      "path": "microsoft.csharp/4.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/MonoAndroid10/_._",
+        "lib/MonoTouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/Microsoft.CSharp.dll",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.3/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.dll",
+        "lib/netstandard2.0/Microsoft.CSharp.xml",
+        "lib/portable-net45+win8+wp8+wpa81/_._",
+        "lib/uap10.0.16299/_._",
+        "lib/win8/_._",
+        "lib/wp80/_._",
+        "lib/wpa81/_._",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "microsoft.csharp.4.7.0.nupkg.sha512",
+        "microsoft.csharp.nuspec",
+        "ref/MonoAndroid10/_._",
+        "ref/MonoTouch10/_._",
+        "ref/net45/_._",
+        "ref/netcore50/Microsoft.CSharp.dll",
+        "ref/netcore50/Microsoft.CSharp.xml",
+        "ref/netcore50/de/Microsoft.CSharp.xml",
+        "ref/netcore50/es/Microsoft.CSharp.xml",
+        "ref/netcore50/fr/Microsoft.CSharp.xml",
+        "ref/netcore50/it/Microsoft.CSharp.xml",
+        "ref/netcore50/ja/Microsoft.CSharp.xml",
+        "ref/netcore50/ko/Microsoft.CSharp.xml",
+        "ref/netcore50/ru/Microsoft.CSharp.xml",
+        "ref/netcore50/zh-hans/Microsoft.CSharp.xml",
+        "ref/netcore50/zh-hant/Microsoft.CSharp.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.0/Microsoft.CSharp.dll",
+        "ref/netstandard1.0/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/de/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/es/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/fr/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/it/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ja/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ko/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/ru/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/zh-hans/Microsoft.CSharp.xml",
+        "ref/netstandard1.0/zh-hant/Microsoft.CSharp.xml",
+        "ref/netstandard2.0/Microsoft.CSharp.dll",
+        "ref/netstandard2.0/Microsoft.CSharp.xml",
+        "ref/portable-net45+win8+wp8+wpa81/_._",
+        "ref/uap10.0.16299/_._",
+        "ref/win8/_._",
+        "ref/wp80/_._",
+        "ref/wpa81/_._",
+        "ref/xamarinios10/_._",
+        "ref/xamarinmac20/_._",
+        "ref/xamarintvos10/_._",
+        "ref/xamarinwatchos10/_._",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "Numpy.Bare/3.7.1.4": {
+      "sha512": "8dABpnCImWsCtiVTCJbhwQQErXT9oWOkmc/xXYeNr7CFmNkNFco8a4xAlQ/jL0toRx8xXdYuaURW2gp7/L/vRw==",
+      "type": "package",
+      "path": "numpy.bare/3.7.1.4",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Numpy.Bare.dll",
+        "numpy.bare.3.7.1.4.nupkg.sha512",
+        "numpy.bare.nuspec"
+      ]
+    },
+    "Python.Deployment/2.0.5": {
+      "sha512": "U+hZ6L5tgPjX9bA/+K2rVQ94MNWGld+HIH78ULZ5ogfwVNvesaIEXhvKPLA6O6YuQF406Uw3WBLTCRlCpMC2QQ==",
+      "type": "package",
+      "path": "python.deployment/2.0.5",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Python.Deployment.dll",
+        "python.deployment.2.0.5.nupkg.sha512",
+        "python.deployment.nuspec"
+      ]
+    },
+    "Python.Included/3.11.6": {
+      "sha512": "aNkCKmk7Rb/nZP9jqvwyI9pL5GWhAYAVLcjC0LzrQjlQJYiFXmUoUOb+vQ/sPrQq+2ynlkfbsnekD5K5tvueKg==",
+      "type": "package",
+      "path": "python.included/3.11.6",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "lib/netstandard2.0/Python.Included.dll",
+        "python.included.3.11.6.nupkg.sha512",
+        "python.included.nuspec",
+        "python_included_nuget.png"
+      ]
+    },
+    "Python.Runtime/2.7.9": {
+      "sha512": "NBS5t9KJvBVDoAFsVOQ79Ri133Hir8O6sqcEZJufXLVvlReXvzyZKhkcO5fpWcqjj6798qrWd/tO/TXCx2Ga7g==",
+      "type": "package",
+      "path": "python.runtime/2.7.9",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "python.exe",
+        "python.runtime.2.7.9.nupkg.sha512",
+        "python.runtime.nuspec"
+      ]
+    },
+    "Python.Runtime.NETStandard/3.7.0": {
+      "sha512": "kztpXZ7zxN3kkOLuyDM+NFl8qQeD57iXhG3AbI6rcn2s3LQpgOn+63iLZ2Cqv6PLYiiXR6XFf8Sqj8jVFfibqA==",
+      "type": "package",
+      "path": "python.runtime.netstandard/3.7.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Python.Runtime.NETStandard.dll",
+        "python.runtime.netstandard.3.7.0.nupkg.sha512",
+        "python.runtime.netstandard.nuspec"
+      ]
+    },
+    "pythonnet/3.0.1": {
+      "sha512": "FYgnTnIUDE/9CC1m/046UvevJW9RYLtvyc98pycc+76lFG+MdTlwkKoG63RkvPKgbqlJJSMqu8zxeiqHS8vR9Q==",
+      "type": "package",
+      "path": "pythonnet/3.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "lib/netstandard2.0/Python.Runtime.dll",
+        "lib/netstandard2.0/Python.Runtime.xml",
+        "python-clear.png",
+        "pythonnet.3.0.1.nupkg.sha512",
+        "pythonnet.nuspec"
+      ]
+    },
+    "System.Reflection.Emit/4.3.0": {
+      "sha512": "228FG0jLcIwTVJyz8CLFKueVqQK36ANazUManGaJHkO0icjiIypKW7YLWLIWahyIkdh5M7mV2dJepllLyA1SKg==",
+      "type": "package",
+      "path": "system.reflection.emit/4.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ThirdPartyNotices.txt",
+        "dotnet_library_license.txt",
+        "lib/MonoAndroid10/_._",
+        "lib/monotouch10/_._",
+        "lib/net45/_._",
+        "lib/netcore50/System.Reflection.Emit.dll",
+        "lib/netstandard1.3/System.Reflection.Emit.dll",
+        "lib/xamarinios10/_._",
+        "lib/xamarinmac20/_._",
+        "lib/xamarintvos10/_._",
+        "lib/xamarinwatchos10/_._",
+        "ref/MonoAndroid10/_._",
+        "ref/net45/_._",
+        "ref/netstandard1.1/System.Reflection.Emit.dll",
+        "ref/netstandard1.1/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/de/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/es/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/fr/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/it/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/ja/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/ko/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/ru/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/zh-hans/System.Reflection.Emit.xml",
+        "ref/netstandard1.1/zh-hant/System.Reflection.Emit.xml",
+        "ref/xamarinmac20/_._",
+        "system.reflection.emit.4.3.0.nupkg.sha512",
+        "system.reflection.emit.nuspec"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETFramework,Version=v4.7.2": [
+      "Numpy.Bare >= 3.7.1.4",
+      "Python.Included >= 3.11.6",
+      "Python.Runtime >= 2.7.9"
+    ]
+  },
+  "packageFolders": {
+    "C:\\Users\\salva\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "C:\\Users\\salva\\source\\repos\\TuningMobileNet\\TuningMobileNet.csproj",
+      "projectName": "TuningMobileNet",
+      "projectPath": "C:\\Users\\salva\\source\\repos\\TuningMobileNet\\TuningMobileNet.csproj",
+      "packagesPath": "C:\\Users\\salva\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\salva\\source\\repos\\TuningMobileNet\\obj\\",
+      "projectStyle": "PackageReference",
+      "skipContentFileWrite": true,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
+      "configFilePaths": [
+        "C:\\Users\\salva\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+      ],
+      "originalTargetFrameworks": [
+        "net472"
+      ],
+      "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "net472": {
+          "projectReferences": {}
+        }
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
+      }
+    },
+    "frameworks": {
+      "net472": {
+        "dependencies": {
+          "Numpy.Bare": {
+            "target": "Package",
+            "version": "[3.7.1.4, )"
+          },
+          "Python.Included": {
+            "target": "Package",
+            "version": "[3.11.6, )"
+          },
+          "Python.Runtime": {
+            "target": "Package",
+            "version": "[2.7.9, )"
+          }
+        }
+      }
+    },
+    "runtimes": {
+      "win": {
+        "#import": []
+      },
+      "win-arm64": {
+        "#import": []
+      },
+      "win-x64": {
+        "#import": []
+      },
+      "win-x86": {
+        "#import": []
+      }
+    }
+  }
+}
