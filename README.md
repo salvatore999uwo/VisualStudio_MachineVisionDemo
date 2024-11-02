@@ -4,9 +4,9 @@ that classification model to identify any of a set of images of powerline insula
 The net loads up an image of a powerline insulator in the countryside, and classifies the image as "broken" or "not broken". The "broken" images are artifially generated, but the model could easily be tuned to do more useful work (such as detecting defects on the label of a cereal box, for example). 
 
 A normal ("not broken") insulator image, used in training:
-![Good Insulator](images/good.png)
+![Good Insulator](images/good.jpg)
 
 
 A broken insulator image, also used in training:
-![Bad Insulator](images/broken.png)
+![Bad Insulator](images/broken.jpg)
 
