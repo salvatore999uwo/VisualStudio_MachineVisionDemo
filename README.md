@@ -10,3 +10,6 @@ A normal ("not broken") insulator image, used in training:
 A broken insulator image, also used in training:
 ![Bad Insulator](images/broken.jpg)
 
+
+TO RUN THIS PROJECT
+Simply download the folder marked "MachineVisionInference", save it to your desktop (or other folder), then open the project or solution file with Visual Studio. The following libraries will need to be downloaded using NuGet: Microsoft.ML, Microsoft.ML.Tensorflow, Microsoft.ML.ImageAnalytics. To run the model, simply change the file paths to the photos and the model to the paths on your own computer, and hit run. 
