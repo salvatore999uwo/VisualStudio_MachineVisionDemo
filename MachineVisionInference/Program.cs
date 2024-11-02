@@ -9,7 +9,7 @@ using Microsoft.ML.Data;
 using Microsoft.ML.Transforms.Image;
 
 using System.Drawing;
-using static System.Net.Mime.MediaTypeNames;
+//using static System.Net.Mime.MediaTypeNames;
 using System.Windows.Forms;
 
 
@@ -22,7 +22,7 @@ namespace MachineVisionInference
         public class ImageInput
         {
             [ImageType(224, 224)]
-            public Bitmap Image { get; set; }
+            public Bitmap? Image { get; set; }
         }
 
         public class ImagePrediction
@@ -36,7 +36,7 @@ namespace MachineVisionInference
             var mlContext = new MLContext();
 
             // Path to the model file
-            var modelPath = "path/to/your_model.pb";
+            var modelPath = "C:\\Users\\salva\\source\\repos\\SAVED_MODEL";
 
             // Load TensorFlow model
             var tensorflowModel = mlContext.Model.LoadTensorFlowModel(modelPath);
@@ -45,11 +45,23 @@ namespace MachineVisionInference
             var pipeline = mlContext.Transforms.LoadImages(outputColumnName: "input", imageFolder: "", inputColumnName: nameof(ImageInput.Image))
                 .Append(mlContext.Transforms.ResizeImages(outputColumnName: "input", imageWidth: 224, imageHeight: 224))
                 .Append(mlContext.Transforms.ExtractPixels(outputColumnName: "input"))
-                .Append(tensorflowModel.ScoreTensorName("output"))
+                .Append(mlContext.Model.LoadTensorFlowModel(modelPath)
+                    .ScoreTensorFlowModel(
+                        outputColumnNames: new[] { "output" },  // Replace "output" with the actual output tensor name of your model
+                        inputColumnNames: new[] { "input" },    // Replace "input" with the actual input tensor name of your model
+                        addBatchDimensionInput: true))
                 .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
-            // Create prediction engine
-            var predictionEngine = mlContext.Model.CreatePredictionEngine<ImageInput, ImagePrediction>(pipeline);
+
+
+            // Fit the pipeline to create an ITransformer
+            var emptyDataView = mlContext.Data.LoadFromEnumerable(new List<ImageInput>());
+            var model = pipeline.Fit(emptyDataView); // Fit the pipeline and get the transformer
+
+            // Create the PredictionEngine using the fitted transformer (model)
+            var predictionEngine = mlContext.Model.CreatePredictionEngine<ImageInput, ImagePrediction>(model);
+
+
 
             // Load an image and make a prediction
             var image = new Bitmap("path/to/real_image.jpg");
@@ -61,13 +73,11 @@ namespace MachineVisionInference
 
 
 
-
-
             // Display the image and overlay prediction information
             string predictionText = prediction.PredictedLabel ? "Broken" : "Not Broken";
             string actualLabel = "Actual Label Here"; // Replace with the actual label if available
 
-            // Annotate image with prediction and actual label
+            // write on the image with prediction and actual label
             using (Graphics g = Graphics.FromImage(image))
             {
                 Font font = new Font("Arial", 16);
@@ -83,7 +93,7 @@ namespace MachineVisionInference
         }
 
 
-        // Method to display image in a Windows Form
+        // quick method that shows the image in a windows form 
         private static void DisplayImage(Bitmap image)
         {
             Form form = new Form
@@ -102,17 +112,7 @@ namespace MachineVisionInference
             form.Controls.Add(pictureBox);
             Application.Run(form);
 
-
-
-
-
         }
-
-
-
-
-
-
 
 
 
