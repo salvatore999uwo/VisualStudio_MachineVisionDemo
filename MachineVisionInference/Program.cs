@@ -18,10 +18,10 @@ namespace MachineVisionInference
 
     public class Program
     {
-        // Input and Output data structure
+        //setup the input and output data structure (metadata is for setting the image size, matches what the model needs to be fed)
         public class ImageInput
         {
-            [ImageType(224, 224)]
+            [ImageType(64,64)]
             public Bitmap? Image { get; set; }
         }
 
@@ -35,36 +35,39 @@ namespace MachineVisionInference
         {
             var mlContext = new MLContext();
 
-            // Path to the model file
-            var modelPath = "C:\\Users\\salva\\source\\repos\\SAVED_MODEL";
+            //path to the model file on my machine
+            var modelPath = "C:\\Users\\salva\\source\\repos\\SAVED_MODELS";
 
-            // Load TensorFlow model
+            //load TensorFlow model using the MLContext we created earlier 
             var tensorflowModel = mlContext.Model.LoadTensorFlowModel(modelPath);
 
-            // Define preprocessing pipeline
+            //define preprocessing pipeline, from loading to preprocessing to turning our bitmaps into a tensor
             var pipeline = mlContext.Transforms.LoadImages(outputColumnName: "input", imageFolder: "", inputColumnName: nameof(ImageInput.Image))
-                .Append(mlContext.Transforms.ResizeImages(outputColumnName: "input", imageWidth: 224, imageHeight: 224))
-                .Append(mlContext.Transforms.ExtractPixels(outputColumnName: "input"))
+                .Append(mlContext.Transforms.ResizeImages(outputColumnName: "input", imageWidth: 64, imageHeight: 64))
+                .Append(mlContext.Transforms.ExtractPixels(outputColumnName: "input")) //this part converts the bitmap to a tensor for the model to understand
                 .Append(mlContext.Model.LoadTensorFlowModel(modelPath)
                     .ScoreTensorFlowModel(
-                        outputColumnNames: new[] { "output" },  // Replace "output" with the actual output tensor name of your model
-                        inputColumnNames: new[] { "input" },    // Replace "input" with the actual input tensor name of your model
+                        outputColumnNames: new[] { "dense_1" },  //replace with the actual output tensor name
+                        inputColumnNames: new[] { "serving_default_conv2d_input" },    //replace with the actual input tensor name
                         addBatchDimensionInput: true))
                 .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
 
 
-            // Fit the pipeline to create an ITransformer
-            var emptyDataView = mlContext.Data.LoadFromEnumerable(new List<ImageInput>());
-            var model = pipeline.Fit(emptyDataView); // Fit the pipeline and get the transformer
+            //fit the pipeline to create an ITransformer
+            var emptyDataView = mlContext.Data.LoadFromEnumerable(new List<ImageInput>()); //make an empty list of our ImageInput type, make an emptyDataView from it 
+            var model = pipeline.Fit(emptyDataView); //fit the pipeline and get the transformer 
 
-            // Create the PredictionEngine using the fitted transformer (model)
+            //create the PredictionEngine using the fitted transformer (model)
             var predictionEngine = mlContext.Model.CreatePredictionEngine<ImageInput, ImagePrediction>(model);
+            //a predictionEngine is a wrapper around the model used to classify one image at a time 
+            //it takes in that list of our types ImageInput, ImagePrediction 
+            //ImageInput (a 64x64 bitmap) is the input to the predictionEngine, and an ImagePrediction (a true/false value for broken/not broken) is the output
 
 
 
-            // Load an image and make a prediction
-            var image = new Bitmap("path/to/real_image.jpg");
+            //load an image and make a prediction
+            var image = new Bitmap("C:\\Users\\salva\\source\\repos\\MachineVisionInference\\0049.jpg");
             var imageData = new ImageInput { Image = image };
             var prediction = predictionEngine.Predict(imageData);
 
@@ -73,11 +76,11 @@ namespace MachineVisionInference
 
 
 
-            // Display the image and overlay prediction information
+            //display the image and overlay prediction information
             string predictionText = prediction.PredictedLabel ? "Broken" : "Not Broken";
-            string actualLabel = "Actual Label Here"; // Replace with the actual label if available
+            string actualLabel = "actual label"; // Replace with the actual label if available
 
-            // write on the image with prediction and actual label
+            //write on the image with prediction and actual label
             using (Graphics g = Graphics.FromImage(image))
             {
                 Font font = new Font("Arial", 16);
@@ -87,13 +90,13 @@ namespace MachineVisionInference
                 g.DrawString($"Actual: {actualLabel}", font, brush, new PointF(10, 40));
             }
 
-            // Display the annotated image
+            //display the annotated image
             DisplayImage(image);
 
         }
 
 
-        // quick method that shows the image in a windows form 
+        //quick method that shows the image in a windows form 
         private static void DisplayImage(Bitmap image)
         {
             Form form = new Form
