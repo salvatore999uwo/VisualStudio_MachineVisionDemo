@@ -47,8 +47,8 @@ namespace MachineVisionInference
                 .Append(mlContext.Transforms.ExtractPixels(outputColumnName: "input")) //this part converts the bitmap to a tensor for the model to understand
                 .Append(mlContext.Model.LoadTensorFlowModel(modelPath)
                     .ScoreTensorFlowModel(
-                        outputColumnNames: new[] { "dense_1" },  //replace with the actual output tensor name
-                        inputColumnNames: new[] { "serving_default_conv2d_input" },    //replace with the actual input tensor name
+                        outputColumnNames: new[] { "dense_1" },  //this should be the actual output tensor name
+                        inputColumnNames: new[] { "serving_default_conv2d_input" },    //this should be the actual input tensor name
                         addBatchDimensionInput: true))
                 .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
